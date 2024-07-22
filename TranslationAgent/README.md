@@ -19,29 +19,39 @@
 
 #### 2.1 如何新增大模型API调用形式
 
-找到get_completion.py，修改相应的代码：
+该步骤分为两步，第一步增加API的调用，第一步增加对应大模型Tokenizer文件。
 
-```
-llm = os.environ.get("llm")
+* 1 找到get_completion.py，修改相应的代码
 
-if llm in ["deepseek-chat"]:
-    import openai
-    client = openai.OpenAI(api_key=api_key, base_url=base_url)
-elif llm in ["glm-4"]:
-    from zhipuai import ZhipuAI
-    client = ZhipuAI(api_key=api_key)
+  ```
+  import os
+  from dotenv import load_dotenv
+  
+  load_dotenv()
+  api_key = os.environ.get("api_key")
+  base_url = os.environ.get("base_url")
+  llm = os.environ.get("llm")
+  
+  if llm in ["deepseek-chat"]:
+      import openai
+      client = openai.OpenAI(api_key=api_key, base_url=base_url)
+  elif llm in ["glm-4"]:
+      from zhipuai import ZhipuAI
+      client = ZhipuAI(api_key=api_key)
+  
+  
+  def get_completion(system_message, prompt, model=llm, temperature=1.0):
+      response = client.chat.completions.create(
+          model=model, temperature=temperature,
+          messages=[
+              {"role": "system", "content": system_message},
+              {"role": "user", "content": prompt}
+          ]
+      )
+      return response.choices[0].message.content
+  ```
 
-
-def get_completion(system_message, prompt, model=llm, temperature=1.0):
-    response = client.chat.completions.create(
-        model=model, temperature=temperature,
-        messages=[
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt}
-        ]
-    )
-    return response.choices[0].message.content
-```
+* 2 往tokenizer文件夹中新增对应大模型的Tokenizer，因为在multichunk翻译过程中需要计算token数量。
 
 #### 2.2 如何设置大模型的api_key和base_url
 
@@ -75,3 +85,47 @@ def multi_chunk_translate(input: TranslationMultiInput) -> TranslationMultiInput
     input = multi_chunk_improve_translation(input)
     return input
 ```
+
+#### 2.4 如何使用TranslationAgent
+
+首先来到main.py，入口函数为translate，该函数接受两个参数，TranslationSingleInput和mode
+
+* 1 TranslationSingleInput，当输入text的token数量大于.env设置的最大token数，会自动将TranslationSingleInput变成TranslationMultiInput
+
+  * 1.1 TranslationSingleInput
+
+    ```
+    @dataclass
+    class TranslationSingleInput:
+        field: str = "AI Academic"
+        country: str = "england"
+        source_language: str = "chinese"
+        target_language: str = "english"
+        text: str = None
+        translation: str = None
+        reflection: str = None
+        improve: str = None
+    ```
+
+  * 1.2 TranslationMultiInput(multi chunk)
+
+    ```
+    @dataclass
+    class TranslationMultiInput:
+        field: str = "AI Academic"
+        country: str = "england"
+        source_language: str = "chinese"
+        target_language: str = "english"
+        texts: str = None
+        translations: str = None
+        reflections: str = None
+        improves: str = None
+    ```
+
+* `
+
+* 2 mode，不同的mode返回的信息不一致
+  * mode == "all"，将返回全部信息，包括初始翻译、翻译建议、翻译改进版本。
+  * mode == "init"，只返回初始翻译
+  * mode == "reflect"，只返回翻译建议
+  * mode == "improve"，只返回最终翻译改进版本
