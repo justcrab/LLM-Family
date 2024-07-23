@@ -1,0 +1,31 @@
+#!/bin/bash
+
+deepspeed  --include localhost:0,1 llava/Trainer.py \
+    --deepspeed ./scripts/zero0.json \
+    --model_name_or_path ../model/llava \
+    --data_path ../data/try.json \
+    --image_dir ../images \
+    --bf16 True \
+    --model_save_dir ../model/qwen1.5-7b-pretrain \
+    --output_dir ../checkpoints/qwen1.5-7b-pretrain \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size 4 \
+    --gradient_accumulation_steps 4 \
+    --save_strategy "steps" \
+    --optim "adamw_torch" \
+    --adam_beta1 0.9 \
+    --adam_beta2 0.95 \
+    --ddp_find_unused_parameter False \
+    --save_steps 1000 \
+    --save_total_limit 2 \
+    --learning_rate 1e-3 \
+    --weight_decay 0. \
+    --warmup_ratio 0.05 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 10 \
+    --gradient_checkpointing True \
+    --dataloader_num_workers 4 \
+    --logging_dir ./logs \
+    --report_to tensorboard \
+    --lora_enable True \
+    --bits 16

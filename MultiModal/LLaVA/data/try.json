@@ -1,0 +1,30 @@
+[
+  {
+    "id": "001",
+    "image": "001.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Render a clear and concise summary of the photo.\n<image>"
+      },
+      {
+        "from": "gpt",
+        "value": "select luxury furniture 3 - inch gel memory foam mattress topper"
+      }
+    ]
+  },
+  {
+    "id": "002",
+    "image": "002.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Write a terse but informative summary of the picture.\n<image>"
+      },
+      {
+        "from": "gpt",
+        "value": "a grey watch with an army style strap"
+      }
+    ]
+  }
+]
