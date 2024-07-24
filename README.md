@@ -8,14 +8,23 @@ Translation Agent: 吴恩达大佬开源的translation-agent的二创，增加�
 
 ReACT: ReACT-based 框架的最小Agent实现。
 
+AutoGPT: 基于AutoGPT V0.4.4自定义魔改版本，支持国产大模型，同时源码更加清晰。
+
+持续更新中...
+
 ### 2 PreTrain
 
-更新中...
+CrabGPT：基于Qwen1.5 0.24B模型和ChatGLM3-6B词表和13B预训练数据从零预训练的大模型。
+
+持续更新中...
 
 ### 3 MultiModal
 
-更新中...
+LLaVA：从零开始训练一个属于自己的LLaVA。
+
+持续更新中...
 
 
 
-个人博客网站：https://crabboss.space
+个人博客网站：[https://crabboss.space](https://crabboss.space/)
+
