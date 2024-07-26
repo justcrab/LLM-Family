@@ -2,6 +2,25 @@
 
 ### 1 langchain
 
+langchain各个模块的关系如下：
+
+* Model I/O
+* Data Connection
+* Memory
+* Chain
+* Agent
+* Callbacks
+
+![langchain的模块图片](src/images/langchain/F1xWz46aIAE-uJO.jpg)
+
+图片来源：https://x.com/zhanghaili0610/status/1683316685489713152
+
+**langchain的框架图：**
+
+![langchain的框架图](src/images/langchain/langchain_stack.svg)
+
+图片来源：https://www.langchain.asia/get_started/introduction
+
 ### 1.1 quickstart
 
 用于langchain的入门介绍，在这个快速入门中，我们将向您展示如何：
