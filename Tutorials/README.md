@@ -21,6 +21,12 @@ langchain各个模块的关系如下：
 
 图片来源：https://www.langchain.asia/get_started/introduction
 
+langchain近期将langchain拆分为langchain，langchain_core，同时社区提供的工具等汇聚到langchain_community.
+
+* langchain_core保留llm的最小实现，Model I/O。
+* langchain保留chain, tool, agent的实现。
+* langchian_community提供Retrievel等实现（数据载入，数据切分，向量编码，向量数据库，检索器）
+
 ### 1.1 quickstart
 
 用于langchain的入门介绍，在这个快速入门中，我们将向您展示如何：
