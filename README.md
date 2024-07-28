@@ -34,6 +34,10 @@
 
 **Langchain：**Langchian教程
 
+**LangGraph:** LangGraph教程
+
+持续更新中...
+
 
 
 个人博客网站：[https://crabboss.space](https://crabboss.space/)
