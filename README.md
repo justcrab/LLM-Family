@@ -38,6 +38,8 @@
 
 **Langsmith:** Langsmith教程
 
+**Langserve:** Langserve教程
+
 **Streamlit:** Streamlit教程
 
 **RAG：**RAG教程
