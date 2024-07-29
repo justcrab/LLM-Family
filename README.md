@@ -36,6 +36,8 @@
 
 **LangGraph:** LangGraph教程
 
+**Langsmith:** Langsmith教程
+
 **Streamlit:** Streamlit教程
 
 **RAG：**RAG教程
